@@ -1,0 +1,28 @@
+<project name="SEXTANTE_LIB" default="generate-without-source" basedir=".">
+    <description>
+        SEXTANTE_LIB
+    </description>
+	<property name="build" location="bin"/>
+	<property name="dist"  location="dist"/>
+	<property name="version.number" value="1.0"/>
+	<property name="sextante_dir" value="es.unex.sextante"/>
+	<property name="extension-dir" location="${GVSIG_INSTALL_DIR}/gvSIG/extensiones"/>
+  
+	<target name="generate-without-source" description="generate the distribution without the source file">
+
+		<tstamp>
+			<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<mkdir dir="dist"/>
+
+		<jar jarfile="${extension-dir}/${sextante_dir}/sextante_sidgrid-${version.number}.jar" basedir="${build}">
+			<fileset dir="${dist}">
+			    <include name="**"/>
+			</fileset>
+			<manifest>
+			    <attribute name="Implementation-Version" value="${version.number}"/>
+			    <attribute name="Built-Date" value="${TODAY}"/>
+			</manifest>
+		</jar>
+	</target>
+</project>
